@@ -10,17 +10,10 @@ if (!defined('ABSPATH')) {
 new SNWK_API();
 class SNWK_API
 {
-    public function __construct()
-    {
-/*         add_action('init', array($this, 'faq_type'));
-        add_action('extendio-faq-cats_add_form_fields', array($this, 'add_category_metabox'), 10); */
-    }
-
 
     public function wayke_call($endpoint,$args=array()){
         
         /**
-         * Header x-api-key  : 722f42aafabb489a8b26eedd7f5a5c90
          * GET https://api.wayke.se/search/vehicles
          * hits och offset för pageinering
          */

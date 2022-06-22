@@ -120,7 +120,7 @@ class SNWK_DesignElements
 
     public static function standard_box($item = false)
     {
-        if ($item) {
+        if ($item && is_object($item)) {
             //extract($content_array, EXTR_PREFIX_SAME, "wddx");
             //$item->title." ".$item->shortDescription;
             //print_r($item);
