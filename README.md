@@ -1,2 +1,2 @@
 # snillrik-wayke
-A WordPress plugin for searching and displaying cars from Wayke via their API.
+A WordPress plugin for searching and displaying cars from Wayke via their API. You need a Wayke account to use this.
