@@ -42,8 +42,8 @@ class SNWK_DesignElements
         ];
 
         $rangenumbers = [
-            "price"=>["min"=>0,"max"=>500000,"step"=>1000],
-            "mileage"=>["min"=>0,"max"=>10000,"step"=>10]
+            "price" => ["min" => 0, "max" => 500000, "step" => 1000],
+            "mileage" => ["min" => 0, "max" => 10000, "step" => 10]
         ];
         $html_out = "";
         $html_out2 = "";
@@ -57,29 +57,27 @@ class SNWK_DesignElements
                 $prev_value = "";
                 if ($facet->id == "price" || $facet->id == "mileage") {
 
-                    //print_r($facet);
-                   
                     $args = isset($_GET) ? $_GET : array();
-                    $args = array_filter($args, function($val) {
+                    $args = array_filter($args, function ($val) {
                         return esc_attr($val);
                     });
 
-                    $min_value = isset($args[$facet->id."_min"]) ? $args[$facet->id."_min"] : $rangenumbers[$facet->id]["min"];
-                    $max_value = isset($args[$facet->id."_max"]) ? preg_replace('/\D/', '',$args[$facet->id."_max"]) : $rangenumbers[$facet->id]["max"];
-                    $max_value_str = isset($args[$facet->id."_max"]) ? $args[$facet->id."_max"] : $rangenumbers[$facet->id]["max"]."+";
+                    $min_value = isset($args[$facet->id . "_min"]) ? $args[$facet->id . "_min"] : $rangenumbers[$facet->id]["min"];
+                    $max_value = isset($args[$facet->id . "_max"]) ? preg_replace('/\D/', '', $args[$facet->id . "_max"]) : $rangenumbers[$facet->id]["max"];
+                    $max_value_str = isset($args[$facet->id . "_max"]) ? $args[$facet->id . "_max"] : $rangenumbers[$facet->id]["max"] . "+";
                     $step_value = $rangenumbers[$facet->id]["step"];
-                    $facet_id_min = $facet->id."_min";
-                    $facet_id_max = $facet->id."_max";
+                    $facet_id_min = $facet->id . "_min";
+                    $facet_id_max = $facet->id . "_max";
 
                     $temp_fac .= "<div class='snillrik-waykesearch-rangewrap-min'>
                     <h4>$name_out min</h4>
                         <input id='$facet_id_min' name='$facet_id_min' value='$min_value'><br />
-                        <input type='range' min='".$rangenumbers[$facet->id]["min"]."' max='".($rangenumbers[$facet->id]["max"]-1)."' step=$step_value value='$min_value' /></div>";
+                        <input type='range' min='" . $rangenumbers[$facet->id]["min"] . "' max='" . ($rangenumbers[$facet->id]["max"] - 1) . "' step=$step_value value='$min_value' /></div>";
                     $temp_fac .= "<div class='snillrik-waykesearch-rangewrap-max'>
                     <h4>$name_out max</h4>
                         <input id='$facet_id_max' name='$facet_id_max' value='$max_value_str'><br />
-                        <input type='range' min='".$rangenumbers[$facet->id]["min"]."' max='".$rangenumbers[$facet->id]["max"]."' step=$step_value value='".$max_value."' /></div><br />";
-                    
+                        <input type='range' min='" . $rangenumbers[$facet->id]["min"] . "' max='" . $rangenumbers[$facet->id]["max"] . "' step=$step_value value='" . $max_value . "' /></div><br />";
+
                     $html_out2 .= "<div class='snillrik-waykesearch-rangewrap $is_selected_class'>$temp_fac</div>";
                 } else {
                     foreach ($facet->filters as $filter) {
@@ -89,7 +87,6 @@ class SNWK_DesignElements
                         $prev_value_str = is_numeric($prev_value) ? round($prev_value) . " - " : "";
                         $temp_fac .= "<option $selected value='$name_out_filter'>" . $prev_value_str . " " . $name_out_filter_str . "</option>";
 
-                        //$temp_fac .= "<option $selected>". $name_out_filter . "</option>";
                         if ($filter->selected) {
                             $is_selected_class = "is_selected";
                         }
@@ -115,27 +112,21 @@ class SNWK_DesignElements
         <input type='Button' id='snillrik-waykesearch-reset' value='Återställ' />
         </div>
         </form>";
-
     }
 
     public static function standard_box($item = false)
     {
         if ($item && is_object($item)) {
-            //extract($content_array, EXTR_PREFIX_SAME, "wddx");
-            //$item->title." ".$item->shortDescription;
-            //print_r($item);
-            //$image = $item->featuredImage->files[0]->url;
-            //$image = $item->featuredImage->files[0]->formats[2]->url;
             $image = SNWK_DesignElements::get_imagesize_from_files($item->featuredImage->files[0], "770");
             $img_str = "<img src='" . $image . "' />";
             $ret_str = "<div class='snillrik-waykeimage'>$img_str</div>";
             $ret_str .= "<div class='snillrik-waykeover-info'>" . $item->branches[0]->name . "</div>";
             $ret_str .= "<div class='snillrik-waykeinfo'>
             <div class='snillrik-waykeinfo-inner'><strong>" . $item->title . "</strong> " . $item->shortDescription . "</div>" .
-            "<div class='snillrik-waykeinfo-details'>
+                "<div class='snillrik-waykeinfo-details'>
                     <div class='snillrik-waykeinforow'><div>Årsmodell</div><div>" . $item->modelYear . "</div></div>" .
-            "<div class='snillrik-waykeinforow'><div>Mil</div><div>" . $item->mileage . " mil</div></div>" .
-            "<div class='snillrik-waykeinforow'><div>Växellåda</div><div>" . $item->gearboxType . "</div></div></div>" .
+                "<div class='snillrik-waykeinforow'><div>Mil</div><div>" . $item->mileage . " mil</div></div>" .
+                "<div class='snillrik-waykeinforow'><div>Växellåda</div><div>" . $item->gearboxType . "</div></div></div>" .
                 "</div>";
             $ret_str .= "<div class='snillrik-waykeunder-info'><span class='snillrik-waykeprice'>" . SNWK_DesignElements::format_price($item->price) . " kr</span>Pris</div>";
 
@@ -157,17 +148,14 @@ class SNWK_DesignElements
         $description = $item->shortDescription;
 
         $str_out = "<div class='snillrik-waykeitem-head'><h1><strong>$manufacturer $modelName</strong> - $description</h1></div>";
-        //print_r($item);
-        //Utrustning
         $options_str = "";
         $options = $item->options;
 
-        foreach ($options as $key=>$option) {
+        foreach ($options as $key => $option) {
             if ($option != "") {
                 $options_str .= "<div class='snillrik-waykeitem-optionbox'>
                 <div class='snillrik-waykeitem-optionbox-inner'>" . $option . "</div></div>";
             }
-
         }
 
         $str_out .= "<h2>Utrustning</h2><div class='snillrik-waykeitem-options'>$options_str</div>";
@@ -223,7 +211,6 @@ class SNWK_DesignElements
                 <div class='snillrik-waykeitem-full'> $swipe_str $str_out </div>
             </div>";
         }
-
     }
 
     public static function format_price($price)
@@ -237,7 +224,6 @@ class SNWK_DesignElements
             if (strpos($format->format, $size) > -1) {
                 return $format->url;
             }
-
         }
         return $files->url;
     }
@@ -255,21 +241,15 @@ class SNWK_DesignElements
             "effect" => $attributes["effect"],
         );
 
-        //print_r($atts);
         wp_enqueue_script('snillrik-waykeslider-main-script');
         wp_localize_script('snillrik-waykeslider-main-script', 'swipeparams', $js_params);
 
-        //$flashifyitem_metanum[] = array();
         $counter = 1;
         $type_num = 1;
         $swiper_out = '';
 
         foreach ($images as $image) {
-            //die(print_r($image->files[0]->url));
-            //$tumme = esc_url($image->files[0]->url);
             $tumme = SNWK_DesignElements::get_imagesize_from_files($image->files[0], "770");
-
-            //$content = preg_replace("/\[caption.*\[\/caption\]/", '', $image->post_content);
 
             $swiper_out .= "
             <div class='swiper-slide'>
@@ -279,8 +259,6 @@ class SNWK_DesignElements
                 </div>
             </div>";
         }
-
-        //return "<div class='swiper-container'>$swiper_out</div>";
 
         return '<div class="swiper-container">
         <div class="swiper-scrollbar"></div>

@@ -18,7 +18,6 @@ class SNWK_API
          * hits och offset för pageinering
          */
 
-
         $wayke_token = get_option('snillrik_wayke_token', "");
         if(is_array($args)){ 
 
@@ -56,7 +55,5 @@ class SNWK_API
         $body_array = isset($response["body"]) ? json_decode($response["body"]) : false;
 
         return $body_array ? $body_array : $response;
-        //update_option("snimp_taxonomy_" . $typelevel, $body_array);
-
     }
 }

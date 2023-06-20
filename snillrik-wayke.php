@@ -12,7 +12,7 @@ License: GPL2
 DEFINE("SNWK_PLUGIN_URL", plugin_dir_url(__FILE__));
 DEFINE("SNWK_DIR", plugin_dir_path(__FILE__));
 
-require_once SNWK_DIR . 'settings.php';
+require_once SNWK_DIR . 'classes/SNWK_Settings.php';
 require_once SNWK_DIR . 'classes/SNWK_API.php';
 require_once SNWK_DIR . 'classes/SNWK_Shortcodes.php';
 require_once SNWK_DIR . 'classes/SNWK_DesignElements.php';

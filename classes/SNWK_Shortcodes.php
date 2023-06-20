@@ -36,11 +36,10 @@ class SNWK_shortcodes
         $api = new SNWK_API();
         $args = $_GET;
 
-
         $args["hits"] = $attributes['hits'];
 
         $call = $api->wayke_call("vehicles", $args);
-        //print_r($call);
+
         if (isset($call->message)) {
             return $call->message;
         }
@@ -72,12 +71,10 @@ class SNWK_shortcodes
         global $snillrik_price;
         $snillrik_price = 0;
         $api = new SNWK_API();
-        //$call = $api->wayke_call("vehicle", ["id"=>"b88614ff-c004-41e8-8ff8-21fa0283318f"]);
         $call = $api->wayke_call("vehicle", ["id" => $the_car_id]);
 
         $snillrik_price = isset($call->documentList->documents[0]) ? $call->documentList->documents[0]->price : 0;
 
-        //$str_out = print_r($call,true);
         if ($call && isset($call->documentList->numberOfHits) && $call->documentList->numberOfHits > 0) {
             $item = $call->documentList->documents[0];
             $str_out =  SNWK_DesignElements::main_box($item, $attributes['rightcol']);
